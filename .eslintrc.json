@@ -1,0 +1,75 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "settings": {
+      "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+      "import/parsers": {
+        "@typescript-eslint/parser": [".ts", ".tsx"]
+      },
+      "import/resolver": {
+        "typescript": {
+          "directory": "./tsconfig.json"
+        },
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      }
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "standard-with-typescript",
+        "airbnb-typescript/base",
+        "plugin:styled-components-a11y/recommended",
+        "plugin:prettier/recommended",
+        "prettier"
+    ],
+    "overrides": [
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": ["./tsconfig.json"]
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "@typescript-eslint",
+        "prettier",
+        "styled-components-a11y",
+        "eslint-plugin-import-helpers"
+    ],
+    "rules": {
+        "prettier/prettier": "error",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/react-in-jsx-scope": "off",
+        "styled-components-a11y/rule-name": 0,
+        "import/extensions": [
+          "error",
+          "ignorePackages",
+          {
+            "js": "never",
+            "jsx": "never",
+            "ts": "never",
+            "tsx": "never"
+          }
+      ],
+        "import-helpers/order-imports": [
+          "warn",
+          {
+              "newlinesBetween": "always", // new line between groups
+              "groups": [
+                  ["/^react/", "/^next/", "/@next/"],
+                  "/^components/",
+                  "module",
+                  "/^@shared/",
+                  "/absolute/",
+                  ["parent", "sibling", "index"]
+              ],
+              "alphabetize": { "order": "asc", "ignoreCase": true }
+          }
+      ]
+    }
+}
