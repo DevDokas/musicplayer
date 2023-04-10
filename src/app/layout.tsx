@@ -1,9 +1,5 @@
-import Image from 'next/image';
-import Link from 'next/link';
-
-import logo from '@/assets/logo.png';
-
 import './globals.css';
+import './styleLayout.css';
 
 export const metadata = {
   title: 'Music Player',
@@ -42,15 +38,7 @@ export default function RootLayout({
           <meta name="theme-color" content="#ffffff" />
         </>
       </head>
-      <body>
-        <header>
-          <Link href="/">
-            <Image src={logo} alt="" height="30" />
-          </Link>
-          <input className="searchbox" type="search" name="" id="" />
-        </header>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

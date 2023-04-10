@@ -45,6 +45,8 @@
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
         "react/react-in-jsx-scope": "off",
+        "react/no-unknown-property": "off",
+        "@typescript-eslint/no-floating-promises": "off",
         "styled-components-a11y/rule-name": 0,
         "import/extensions": [
           "error",
