@@ -1,5 +1,7 @@
 export default function About(): any {
   return (
-    <h1>Olá</h1>
+    <>
+      <h1>Sobre</h1>
+    </>
   );
 }
