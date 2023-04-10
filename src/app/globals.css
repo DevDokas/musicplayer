@@ -1,8 +1,9 @@
 :root {
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+  --font: 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+    'Fira Mono', 'Montserrat', 'Droid Sans Mono', 'Courier New', sans-serif;
+
 
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 14, 14, 14;
@@ -36,7 +37,8 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
-}
+
+};
 
 * {
   box-sizing: border-box;
@@ -57,7 +59,7 @@ body {
 
 header{
   padding: 4vh;
-  height: 12vh;
+  height: 15vh;
   display: flex;
 }
 
@@ -66,8 +68,3 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}

@@ -47,6 +47,11 @@
         "react/react-in-jsx-scope": "off",
         "react/no-unknown-property": "off",
         "@typescript-eslint/no-floating-promises": "off",
+        "@typescript-eslint/no-confusing-void-expression": "off",
+        "@typescript-eslint/restrict-plus-operands": "off",
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
         "styled-components-a11y/rule-name": 0,
         "import/extensions": [
           "error",

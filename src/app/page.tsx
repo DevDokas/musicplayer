@@ -12,6 +12,7 @@ const CLIENT_SECRET: string = 'a93ee2c123df45639e7a7902e38a8d68';
 export default function Home(): any {
   const [searchInput, setSearchInput] = useState('');
   const [accessToken, setAccessToken] = useState('');
+  const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
     // API Access token
@@ -34,7 +35,39 @@ export default function Home(): any {
   }, []);
 
   async function Search() {
-    console.log(searchInput);
+    // get request using the search to get the artist ID
+    const searchParameters = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + accessToken
+      }
+    };
+    const artistID = await fetch(
+      'https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist',
+      searchParameters
+    )
+      .then(async (res) => res.json())
+      .then((data) => {
+        console.log(data);
+        return data.artists.items[0].id;
+      });
+
+    console.log('Artist ID: ' + artistID);
+    // get request with the artist ID grab all the albuns from that artist
+    const albums = await fetch(
+      'https://api.spotify.com/v1/artists/' +
+        artistID +
+        '/albums' +
+        '?include_groups=album&limit=50',
+      searchParameters
+    )
+      .then(async (res) => res.json())
+      .then((data) => {
+        setSearchResult(data.items);
+      });
+    // Display albuns to user
+    console.log(searchResult);
   }
 
   return (
@@ -61,9 +94,20 @@ export default function Home(): any {
           </div>
         </section>
       </header>
-      <Link href="/about">About</Link>
-      <br />
-      {searchInput}
+      <div className="cardGrid">
+        {searchResult.map((album: any, i: any) => {
+          return (
+            <div className="cardContainer" key={album}>
+              <img className="cardImage" src={album.images[0].url} alt="" />
+              <div className="cardBody">
+                <Link className="cardTitle" href={album.external_urls.spotify}>
+                  {album.name}
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </main>
   );
 }

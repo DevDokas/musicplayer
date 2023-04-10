@@ -1,9 +1,15 @@
+::-webkit-scrollbar {
+  background-color: rgba(100,100,100,0.2);
+  border: 0;
+  border-radius: 25px;
+}
+
 .logoImage {
-  height: 7vh;
+  height: 9vh;
   width: auto;
 }.logoImage:hover{
   transform: scale(1.1);
-  filter: drop-shadow(0 0 0.75rem #1db5df);
+  filter: drop-shadow(0 0 0.75rem #0cb130);
 }
 
 .containerSearch {
@@ -18,18 +24,19 @@
 
 .searchInput {
   padding: 1.5vw;
-  height: 5vh;
+  height: 55px;
   width: 65vw;
   border: 0;
   border-radius: 5vh 0 0 5vh;
-  font-size: 2.3vh;
+  font-size: 30px;
   background-color: rgb(61, 61, 61);
+  color: rgb(192, 192, 192);
 }.searchInput:focus {
   outline: none;
 }
 
 .searchIconContainer{
-  height: 5vh;
+  height: 55px;
   width: 5vw;
   padding: 0 0.5vw 0 0;
   display: flex;
@@ -47,4 +54,46 @@
   transform: scale(1.1);
 }.searchIcon:active{
   transform: scale(0.9)
+}
+
+.cardGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2.5vh;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(20, 20, 20);
+  border: 0;
+  border-radius: 1vh;
+  padding: 2vh 0 1.5vh 0;
+  gap: 1vh;
+  transition: 0.3s;
+}.cardContainer:hover{
+  transform: scale(1.05);
+}
+
+.cardImage {
+  width: 90%;
+  height: 85%;
+  border: 0;
+  border-radius: 1vh;
+}
+
+.cardBody {
+  height: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1vh 1vw 0 1vw;
+}
+
+.cardTitle {
+  font-size: 2vh;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
 }
