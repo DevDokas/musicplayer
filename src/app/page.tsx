@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
@@ -13,6 +14,7 @@ export default function Home(): any {
   const [searchInput, setSearchInput] = useState('');
   const [accessToken, setAccessToken] = useState('');
   const [searchResult, setSearchResult] = useState([]);
+  const { push } = useRouter();
 
   useEffect(() => {
     // API Access token
@@ -59,16 +61,27 @@ export default function Home(): any {
       'https://api.spotify.com/v1/artists/' +
         artistID +
         '/albums' +
-        '?include_groups=album&limit=50',
+        '?include_type=album&limit=50',
       searchParameters
     )
       .then(async (res) => res.json())
       .then((data) => {
         setSearchResult(data.items);
+        console.log(data.items.length);
       });
+    // get request with the album to get the songs
+
+    /* const tracks = await fetch('https://api.spotify.com/v1/artists/' +
+    artistID +
+    '/albums' +) */
+
     // Display albuns to user
     console.log(searchResult);
   }
+  const albumID = (id: string) => {
+    push(`/${id}`);
+    console.log(id);
+  };
 
   return (
     <main>
@@ -89,20 +102,30 @@ export default function Home(): any {
               setSearchInput(e.target.value);
             }}
           />
-          <div className="searchIconContainer">
-            <FaSearch className="searchIcon" onClick={Search} />
-          </div>
+          <button
+            className="searchIconContainer"
+            onClick={Search}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                Search();
+              }
+            }}
+          >
+            <FaSearch className="searchIcon" />
+          </button>
         </section>
       </header>
       <div className="cardGrid">
         {searchResult.map((album: any, i: any) => {
           return (
-            <div className="cardContainer" key={album}>
+            <div
+              className="cardContainer"
+              key={album.uri}
+              onClick={() => albumID(album.uri)}
+            >
               <img className="cardImage" src={album.images[0].url} alt="" />
               <div className="cardBody">
-                <Link className="cardTitle" href={album.external_urls.spotify}>
-                  {album.name}
-                </Link>
+                <h2 className="cardTitle">{album.name}</h2>
               </div>
             </div>
           );
