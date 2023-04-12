@@ -101,3 +101,25 @@
   font-family: 'Montserrat', sans-serif;
   text-align: center;
 }
+
+.modalContainer{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.7 );
+}
+
+.modalBody{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  height: 90%;
+  width: 90%;
+  border: 0;
+  border-radius: 1.5vh;
+  background-color: rgb(29, 29, 29);
+}

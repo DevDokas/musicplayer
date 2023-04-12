@@ -52,6 +52,8 @@
         "@typescript-eslint/no-misused-promises": "off",
         "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
+        "jsx-a11y/click-events-have-key-events" : "off",
+        "jsx-a11y/no-static-element-interactions" : "off",
         "styled-components-a11y/rule-name": 0,
         "import/extensions": [
           "error",
