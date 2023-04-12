@@ -1,7 +1,26 @@
 ::-webkit-scrollbar {
-  background-color: rgba(100,100,100,0.2);
+  background-color: transparent;
   border: 0;
   border-radius: 25px;
+  width: 0.5vw;
+}
+
+::-webkit-scrollbar-thumb {
+  max-height: 15px;
+  height: 15px;
+  border: 0;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 20px;
+}
+
+::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 20px;
 }
 
 .logoImage {
@@ -103,13 +122,21 @@
 }
 
 .modalContainer{
-  position: absolute;
+  position: fixed;
   transform: translate(-50%, -50%);
-  top: 50%;
+  top: 49.9%;
   left: 50%;
-  height: 100%;
+  height: 100.5vh;
   width: 100%;
   background-color: rgba(0,0,0,0.7 );
+}
+
+.closeModal {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 5%;
+  left: 97.5%;
+  font-size: 3vh;
 }
 
 .modalBody{
@@ -117,9 +144,27 @@
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  height: 90%;
+  min-height: 60%;
+  max-height: 90%;
   width: 90%;
   border: 0;
   border-radius: 1.5vh;
   background-color: rgb(29, 29, 29);
+  overflow-y: scroll;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.trackContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5vw 0 1.5vw;
+  background-color: rgba(0,0,0,0.1 );
+  height: 7vh;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.trackName{
+  transform: scale(1.25);
 }

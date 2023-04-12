@@ -161,18 +161,21 @@ export default function Home(): any {
           : null}
         {modalTracks ? (
           <div className="modalContainer">
+            <FaTimes
+              className="closeModal"
+              onClick={() => setModalTracks(false)}
+            />
             <div className="modalBody">
-              <FaTimes onClick={() => setModalTracks(false)} />
               {tracksResult.map((track: any, i: any) => {
-                const musicDurationMs = track.duration_ms;
-                const musicDurationS = musicDurationMs / 1000;
-                const musicDurationMin = musicDurationS / 60;
+                const musicDurationMin = track.duration_ms / 60000;
 
                 return (
-                  <div key={track.id}>
-                    <p>{track.name}</p>
-                    <p>{track.artists[0].name}</p>
-                    <p>{musicDurationMin.toFixed(2).replace('.', ':')}</p>
+                  <div key={track.id} className="trackContainer">
+                    <p className="trackArtistName">{track.artists[0].name}</p>
+                    <p className="trackName">{track.name}</p>
+                    <p className="trackTime">
+                      {musicDurationMin.toFixed(2).replace('.', ':')}
+                    </p>
                   </div>
                 );
               })}
