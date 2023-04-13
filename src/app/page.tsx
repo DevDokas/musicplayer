@@ -15,6 +15,7 @@ export default function Home(): any {
   const [modalTracks, setModalTracks] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const [accessToken, setAccessToken] = useState('');
+  const [albumImage, setAlbumImage] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [tracksResult, setTracksResult] = useState([]);
   const { push } = useRouter();
@@ -71,7 +72,6 @@ export default function Home(): any {
       .then((data) => {
         setSearchResult(data.items);
         setSearchScreen(true);
-        console.log(data.items);
       });
     // get request with the album to get the songs
 
@@ -82,8 +82,9 @@ export default function Home(): any {
     // Display albuns to user
     console.log(searchResult);
   }
-  async function getAlbumID(albumId: string) {
+  async function getAlbumID(albumId: string, artistId: string) {
     const albumID = albumId;
+    const artistID = artistId;
     const searchParameters = {
       method: 'GET',
       headers: {
@@ -91,6 +92,14 @@ export default function Home(): any {
         Authorization: 'Bearer ' + accessToken
       }
     };
+    const albums = await fetch(
+      'https://api.spotify.com/v1/albums/' + albumID,
+      searchParameters
+    )
+      .then(async (res) => res.json())
+      .then((data) => {
+        setAlbumImage(data.images[0].url);
+      });
     const tracks = await fetch(
       'https://api.spotify.com/v1/albums/' + albumID + '/tracks',
       searchParameters
@@ -99,7 +108,6 @@ export default function Home(): any {
       .then((data) => {
         setModalTracks(true);
         setTracksResult(data.items);
-        console.log(data.items);
       });
   }
 
@@ -146,16 +154,24 @@ export default function Home(): any {
         {searchScreen
           ? searchResult.map((album: any, i: any) => {
               return (
-                <div
-                  className="cardContainer"
-                  key={album.uri}
-                  onClick={async () => getAlbumID(album.id)}
-                >
-                  <img className="cardImage" src={album.images[0].url} alt="" />
-                  <div className="cardBody">
-                    <h2 className="cardTitle">{album.name}</h2>
+                <>
+                  <div
+                    className="cardContainer"
+                    key={album.uri}
+                    onClick={async () =>
+                      getAlbumID(album.id, album.artists[0].id)
+                    }
+                  >
+                    <img
+                      className="cardImage"
+                      src={album.images[0].url}
+                      alt=""
+                    />
+                    <div className="cardBody">
+                      <h2 className="cardTitle">{album.name}</h2>
+                    </div>
                   </div>
-                </div>
+                </>
               );
             })
           : null}
@@ -170,13 +186,18 @@ export default function Home(): any {
                 const musicDurationMin = track.duration_ms / 60000;
 
                 return (
-                  <div key={track.id} className="trackContainer">
-                    <p className="trackArtistName">{track.artists[0].name}</p>
-                    <p className="trackName">{track.name}</p>
-                    <p className="trackTime">
-                      {musicDurationMin.toFixed(2).replace('.', ':')}
-                    </p>
-                  </div>
+                  <>
+                    <div className="albumImage">
+                      <img src={albumImage} alt="" />
+                    </div>
+                    <div key={track.id} className="trackContainer">
+                      <p className="trackArtistName">{track.artists[0].name}</p>
+                      <p className="trackName">{track.name}</p>
+                      <p className="trackTime">
+                        {musicDurationMin.toFixed(2).replace('.', ':')}
+                      </p>
+                    </div>
+                  </>
                 );
               })}
             </div>

@@ -161,6 +161,7 @@
   padding: 0 1.5vw 0 1.5vw;
   background-color: rgba(0,0,0,0.1 );
   height: 7vh;
+  width: 50%;
   border-bottom: 3px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
 }
