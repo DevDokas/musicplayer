@@ -140,6 +140,8 @@
 }
 
 .modalBody{
+  display: flex;
+  justify-content: space-between;
   position: absolute;
   transform: translate(-50%, -50%);
   top: 50%;
@@ -161,11 +163,26 @@
   padding: 0 1.5vw 0 1.5vw;
   background-color: rgba(0,0,0,0.1 );
   height: 7vh;
-  width: 50%;
   border-bottom: 3px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
 }
 
 .trackName{
   transform: scale(1.25);
+}
+
+.albumImageContainer{
+  width: 45%;
+  display: flex;
+  margin-top: -7%;
+  align-items: center;
+  align-content: center;
+}
+
+.albumImage{
+  transform: scale(0.85);
+}
+
+.tracksDiv{
+  width: 55%;
 }

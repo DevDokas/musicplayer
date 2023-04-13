@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaSearch, FaTimes } from 'react-icons/fa';
+import SpotifyPlayer from 'react-spotify-web-playback';
 
 import logo from '@/assets/logo.png';
 
@@ -18,6 +19,7 @@ export default function Home(): any {
   const [albumImage, setAlbumImage] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [tracksResult, setTracksResult] = useState([]);
+  const [playingTrack, setPlayingTrack] = useState('');
   const { push } = useRouter();
 
   useEffect(() => {
@@ -154,24 +156,18 @@ export default function Home(): any {
         {searchScreen
           ? searchResult.map((album: any, i: any) => {
               return (
-                <>
-                  <div
-                    className="cardContainer"
-                    key={album.uri}
-                    onClick={async () =>
-                      getAlbumID(album.id, album.artists[0].id)
-                    }
-                  >
-                    <img
-                      className="cardImage"
-                      src={album.images[0].url}
-                      alt=""
-                    />
-                    <div className="cardBody">
-                      <h2 className="cardTitle">{album.name}</h2>
-                    </div>
+                <div
+                  className="cardContainer"
+                  key={album.uri}
+                  onClick={async () =>
+                    getAlbumID(album.id, album.artists[0].id)
+                  }
+                >
+                  <img className="cardImage" src={album.images[0].url} alt="" />
+                  <div className="cardBody">
+                    <h2 className="cardTitle">{album.name}</h2>
                   </div>
-                </>
+                </div>
               );
             })
           : null}
@@ -182,14 +178,14 @@ export default function Home(): any {
               onClick={() => setModalTracks(false)}
             />
             <div className="modalBody">
-              {tracksResult.map((track: any, i: any) => {
-                const musicDurationMin = track.duration_ms / 60000;
+              <div className="albumImageContainer">
+                <img className="albumImage" src={albumImage} alt="" />
+              </div>
+              <div className="tracksDiv">
+                {tracksResult.map((track: any, i: any) => {
+                  const musicDurationMin = track.duration_ms / 60000;
 
-                return (
-                  <>
-                    <div className="albumImage">
-                      <img src={albumImage} alt="" />
-                    </div>
+                  return (
                     <div key={track.id} className="trackContainer">
                       <p className="trackArtistName">{track.artists[0].name}</p>
                       <p className="trackName">{track.name}</p>
@@ -197,9 +193,9 @@ export default function Home(): any {
                         {musicDurationMin.toFixed(2).replace('.', ':')}
                       </p>
                     </div>
-                  </>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </div>
         ) : null}
